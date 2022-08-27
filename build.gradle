@@ -1,0 +1,54 @@
+import org.apache.tools.ant.filters.ReplaceTokens
+
+plugins {
+    id 'java'
+}
+
+group 'io.github.fusezion'
+version '1.0'
+
+compileJava.options.encoding = 'UTF-8'
+
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(8))
+    }
+}
+
+repositories {
+    mavenCentral()
+    maven { url 'https://repo.skriptlang.org/releases' }
+    maven { url 'https://papermc.io/repo/repository/maven-public/' }
+    maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+}
+
+dependencies {
+    implementation group: 'org.eclipse.jdt', name: 'org.eclipse.jdt.annotation', version: '2.2.600'
+    implementation group: 'com.google.code.findbugs', name: 'findbugs', version: '3.0.1'
+    implementation group: 'com.destroystokyo.paper', name: 'paper-api', version: '1.16.5-R0.1-SNAPSHOT'
+    implementation (group: 'com.github.SkriptLang', name: 'Skript', version: '2.6.3') {
+        transitive = false
+    }
+}
+
+processResources {
+    filter ReplaceTokens, tokens: [
+            'version': version
+    ]
+}
+
+task nightlyResources(type: ProcessResources) {
+    from 'src/main/resources', {
+        include '**'
+        filter ReplaceTokens, tokens: [
+                'version' : project.property('version') + '-nightly-' + 'git rev-parse --short HEAD'.execute().text.trim()
+        ]
+    }
+    into 'build/resources/main'
+}
+
+task nightlyBuild(type: Jar) {
+    dependsOn nightlyResources
+    from sourceSets.main.output
+    archiveFileName = 'skript-fishing-nightly.jar'
+}
