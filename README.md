@@ -17,7 +17,7 @@ If you run into any issues, have questions, or want a new feature added, please 
 # Examples and Documentation
 
 Documentation is available on the following wikis:
-**GitHub Wiki:** https://github.com/Fusezion/skript-fishing/wiki
 
+###### **GitHub Wiki:** https://github.com/Fusezion/skript-fishing/wiki
 
-<!--- [![SkriptHubViewTheDocs](http://skripthub.net/static/addon/ViewTheDocsButton.png)](http://skripthub.net/docs/?addon=skript-fishing) --->
+[![SkriptHubViewTheDocs](http://skripthub.net/static/addon/ViewTheDocsButton.png)](http://skripthub.net/docs/?addon=skript-fishing)
