@@ -1,6 +1,10 @@
 package io.github.fusezion.skriptfishing.elements.events;
 
 import ch.njol.skript.Skript;
+import ch.njol.skript.doc.Description;
+import ch.njol.skript.doc.Examples;
+import ch.njol.skript.doc.Name;
+import ch.njol.skript.doc.Since;
 import ch.njol.skript.lang.Literal;
 import ch.njol.skript.lang.SkriptEvent;
 import ch.njol.skript.lang.SkriptParser;
@@ -18,6 +22,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+@Name("On Fishing")
+@Description("Called when a player fishes something. This event can be used for modifying nearly everything related to fishing.")
+@Examples({
+		"on player fishing state of failed attempt:",
+		"\tsend subtitle \"<red>The fish got away\" to player",
+		"on player fish:",
+		"\tif fishing state is caught_fish:",
+		"\t\tset item of event-entity to diamond of lire named \"&eShiny &bDiamond\""
+})
+@Since("1.0")
 public class EvtFishing extends SkriptEvent {
 
 	static {

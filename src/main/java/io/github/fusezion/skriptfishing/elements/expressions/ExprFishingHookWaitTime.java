@@ -1,6 +1,5 @@
 package io.github.fusezion.skriptfishing.elements.expressions;
 
-import ch.njol.skript.Skript;
 import ch.njol.skript.classes.Changer.ChangeMode;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Description;
@@ -10,13 +9,11 @@ import ch.njol.skript.doc.Since;
 import ch.njol.skript.expressions.base.SimplePropertyExpression;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser.ParseResult;
-import ch.njol.skript.log.ErrorQuality;
 import ch.njol.skript.util.Timespan;
 import ch.njol.util.Kleenean;
 import ch.njol.util.coll.CollectionUtils;
 import org.bukkit.entity.FishHook;
 import org.bukkit.event.Event;
-import org.bukkit.event.player.PlayerFishEvent;
 import org.eclipse.jdt.annotation.Nullable;
 
 @Name("Fishing Hook Wait Time")
@@ -49,7 +46,7 @@ public class ExprFishingHookWaitTime extends SimplePropertyExpression<FishHook, 
 
 	@Override
 	public void change(Event event, @Nullable Object[] delta, ChangeMode mode) {
-		if(mode != ChangeMode.RESET && delta == null) return;
+		if(mode != ChangeMode.RESET && delta[0] == null) return;
 
 		int ticks = mode == ChangeMode.RESET ? (isMin ? DEFAULT_MINIMUM_TIME : DEFAULT_MAXIMUM_TIME) : (int) ((Timespan) delta[0]).getTicks_i();
 		switch (mode) {
@@ -72,13 +69,11 @@ public class ExprFishingHookWaitTime extends SimplePropertyExpression<FishHook, 
 				int newValue = Math.max((isSet ? 0 : hook.getMinWaitTime()) + value, 0);
 				if (hook.getMaxWaitTime() < newValue)
 					hook.setMaxWaitTime(newValue);
-
 				hook.setMinWaitTime(newValue);
 			} else {
 				int newValue = Math.max((isSet ? 0 : hook.getMaxWaitTime()) + value, 0);
 				if (hook.getMinWaitTime() > newValue)
 					hook.setMinWaitTime(newValue);
-
 				hook.setMaxWaitTime(newValue);
 			}
 		}

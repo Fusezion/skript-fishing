@@ -26,7 +26,7 @@ import org.eclipse.jdt.annotation.Nullable;
 		"\tif hooked entity of fishing hook is a player:",
 		"\t\tteleport hooked entity of fishing hook to player"
 })
-@Since("INSERT VERSION")
+@Since("1.0")
 public class ExprFishingHookEntity extends SimplePropertyExpression<FishHook, Entity> {
 
 	static {
@@ -44,7 +44,7 @@ public class ExprFishingHookEntity extends SimplePropertyExpression<FishHook, En
 
 	@Override
 	public void change(Event event, @Nullable Object[] delta, ChangeMode mode) {
-		if(mode == ChangeMode.SET && delta == null) return;
+		if(mode == ChangeMode.SET && delta[0] == null) return;
 
 		FishHook[] hooks = getExpr().getArray(event);
 		switch (mode) {

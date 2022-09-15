@@ -22,19 +22,22 @@ public class SkriptFishing extends JavaPlugin {
 	@Override
 	public void onEnable() {
 		Plugin skript = getServer().getPluginManager().getPlugin("Skript");
-		Version MINIMAL_SKRIPT_VERSION = new Version(2,6,3);
+		Version minimumSupportedVersion = new Version(2,6,1);
 		if (skript == null) {
-			getLogger().severe("Could not find Skript! Make sure you have it installed and that it properly loaded, Disabling...");
-			getLogger().severe("Download latest skript version: https://github/SkriptLang/Skript/releases");
+			// Skript doesn't exist within the server plugins folder
+			getLogger().severe("Could not find Skript! Make sure you have it installed. Disabling...");
+			getLogger().severe("skript-fishing requires Skript " + minimumSupportedVersion + " or newer! Download Skript releases at https://github.com/SkriptLang/Skript/releases");
 			getServer().getPluginManager().disablePlugin(this);
 			return;
-		} else if (!skript.isEnabled()) { // Skript is not any version after 2.5.3 (aka 2.6)
-			getLogger().severe("Could not load skript-fishing! Skript is disabled on the server, Disabling...");
+		} else if (!skript.isEnabled()) {
+			// Skript is disabled on the server
+			getLogger().severe("Skript failed to properly enable and is disabled on the server. Disabling...");
 			getServer().getPluginManager().disablePlugin(this);
 			return;
-		} else if (Skript.getVersion().isSmallerThan(MINIMAL_SKRIPT_VERSION)) { // Skript version is below, minimum requirement.
-			getLogger().severe("You are running an unsupported version of Skript v" + Skript.getVersion() + ". Please update to at Skript " + MINIMAL_SKRIPT_VERSION + ", Disabling...");
-			getLogger().severe("Download latest skript version: https://github/SkriptLang/Skript/releases");
+		} else if (Skript.getVersion().isSmallerThan(minimumSupportedVersion)) {
+			// Current Skript version is below minimum required version
+			getLogger().severe("You're running an unsupported Skript version (" + Skript.getVersion() + ")! Disabling...");
+			getLogger().severe("skript-fishing requires Skript " + minimumSupportedVersion + " or newer! Download Skript releases at https://github.com/SkriptLang/Skript/releases");
 			getServer().getPluginManager().disablePlugin(this);
 			return;
 		}
