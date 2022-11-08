@@ -5,7 +5,7 @@ plugins {
 }
 
 group 'io.github.fusezion'
-version '1.1'
+version '1.2'
 
 compileJava.options.encoding = 'UTF-8'
 
@@ -26,7 +26,7 @@ dependencies {
     implementation group: 'org.eclipse.jdt', name: 'org.eclipse.jdt.annotation', version: '2.2.600'
     implementation group: 'com.google.code.findbugs', name: 'findbugs', version: '3.0.1'
     implementation group: 'com.destroystokyo.paper', name: 'paper-api', version: '1.16.5-R0.1-SNAPSHOT'
-    implementation (group: 'com.github.SkriptLang', name: 'Skript', version: '2.6.1') {
+    implementation (group: 'com.github.SkriptLang', name: 'Skript', version: '2.6.3') {
         transitive = false
     }
 }
