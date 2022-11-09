@@ -8,64 +8,60 @@ import ch.njol.skript.lang.ParseContext;
 import ch.njol.skript.registrations.Classes;
 import ch.njol.skript.util.EnumUtils;
 import org.bukkit.entity.FishHook;
-import org.bukkit.event.player.PlayerFishEvent;
+import org.bukkit.event.player.PlayerFishEvent.State;
+import org.eclipse.jdt.annotation.Nullable;
 
 public class FishingTypes {
 
 	static {
 
-		// Only register if no other addons have registered this class
-		if (Classes.getExactClassInfo(PlayerFishEvent.State.class) == null) {
-			EnumUtils<PlayerFishEvent.State> fishStateUtils = new EnumUtils<>(PlayerFishEvent.State.class, "fishingstate");
-			Classes.registerClass(new ClassInfo<>(PlayerFishEvent.State.class, "fishingstate")
-					.user("fish(ing)? ?states?")
-					.name("Fishing State")
-					.description("Represents the fishing state in a <a href='events.html#fishing'>fishing</a> event.")
-					.usage(fishStateUtils.getAllNames())
-					.since("1.0")
-					.parser(new Parser<PlayerFishEvent.State>() {
-						@Override
-						public PlayerFishEvent.State parse(String s, ParseContext context) {
-							return fishStateUtils.parse(s);
+		EnumUtils<State> fishStateUtils = new EnumUtils<>(State.class, "fishing states");
+		Classes.registerClass(new ClassInfo<>(State.class, "fishingstate")
+				.user("fish(ing)? ?states?")
+				.name("Fishing State")
+				.description("Represents the fishing state in a fishing event.")
+				.usage(fishStateUtils.getAllNames())
+				.since("1.0")
+				.parser(new Parser<State>() {
+					@Override
+					@Nullable
+					public State parse(String str, ParseContext context) {
+						return fishStateUtils.parse(str);
 						}
 
-						@Override
-						public String toString(PlayerFishEvent.State o, int flags) {
-							return fishStateUtils.toString(o, flags);
+					@Override
+					public String toString(State obj, int flags) {
+							return fishStateUtils.toString(obj, flags);
 						}
 
-						@Override
-						public String toVariableNameString(PlayerFishEvent.State o) {
-							return o.name();
+					@Override
+					public String toVariableNameString(State obj) {
+							return obj.name();
 						}
-					})
-					.serializer(new EnumSerializer<>(PlayerFishEvent.State.class)));
-		}
-		// Only register if no other addons have registered this class
-		if (Classes.getExactClassInfo(FishHook.class) == null) {
-			Classes.registerClass(new ClassInfo<>(FishHook.class, "fishinghook")
-					.user("fish(ing)? ?hooks")
-					.name("Fishing Hook")
-					.description("Represents the fishing hook in a <a href='events.html#fishing'>fishing</a> event.")
-					.defaultExpression(new EventValueExpression<>(FishHook.class))
-					.since("1.0")
-					.parser(new Parser<FishHook>() {
-						@Override
-						public boolean canParse(ParseContext context) {
+				})
+				.serializer(new EnumSerializer<>(State.class)));
+
+		Classes.registerClass(new ClassInfo<>(FishHook.class, "fishinghook")
+				.user("fish(ing)? ?hooks?")
+				.name("Fishing Hook")
+				.description("Represents the fishing hook in a <a href='events.html#fishing'>fishing</a> event.")
+				.defaultExpression(new EventValueExpression<>(FishHook.class))
+				.since("1.0")
+				.parser(new Parser<FishHook>() {
+					@Override
+					public boolean canParse(ParseContext context) {
 							return false;
 						}
-
-						@Override
-						public String toString(FishHook o, int flags) {
-							return "fishing hook";
+					@Override
+					public String toString(FishHook obj, int flags) {
+							return "fish hook";
 						}
 
-						@Override
-						public String toVariableNameString(FishHook o) {
-							return "fish hook " + o.toString();
+					@Override
+					public String toVariableNameString(FishHook obj) {
+							return "fish hook";
 						}
-					}));
-		}
+				}));
 
 	}
 

@@ -1,6 +1,6 @@
 types:
     fishingstate: fishing state¦s
-	fishinghook: fishing hook¦s
+    fishinghooks: fishing hook¦s
 
 fishingstate:
     bite: BITE
@@ -10,4 +10,3 @@ fishingstate:
     in_ground: IN_GROUND
     reel_in: REEL_IN
     fishing: FISHING
-

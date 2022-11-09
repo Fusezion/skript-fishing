@@ -23,7 +23,7 @@ import org.eclipse.jdt.annotation.Nullable;
 public class ExprFishingState extends EventValueExpression<State> {
 
 	static {
-		Skript.registerExpression(ExprFishingState.class, State.class, ExpressionType.SIMPLE, "[the] [evnet-]fish[ing]( |-)state");
+		Skript.registerExpression(ExprFishingState.class, State.class, ExpressionType.SIMPLE, "[the] [event-]fish[ing]( |-)state");
 	}
 
 	@Override

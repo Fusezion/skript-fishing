@@ -6,3 +6,4 @@ authors: [Fusezion, SkAlternative]
 description: Enables the easy modification of fishing within Skript.
 website: https://github.com/Fusezion/skript-fishing
 softdepend: [Skript]
+loadbefore: [SkBee]
