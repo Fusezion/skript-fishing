@@ -15,7 +15,7 @@ public class FishingTypes {
 
 	static {
 
-		EnumUtils<State> fishStateUtils = new EnumUtils<>(State.class, "fishing states");
+		EnumUtils<State> fishStateUtils = new EnumUtils<>(State.class, "fishingstate");
 		Classes.registerClass(new ClassInfo<>(State.class, "fishingstate")
 				.user("fish(ing)? ?states?")
 				.name("Fishing State")

@@ -5,7 +5,7 @@ plugins {
 }
 
 group 'io.github.fusezion'
-version '1.2.1'
+version '1.2.2'
 
 compileJava.options.encoding = 'UTF-8'
 
